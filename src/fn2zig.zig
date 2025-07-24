@@ -30,27 +30,27 @@ pub const SmartNode = struct {
     }
 
     pub fn genUniformGrid2D(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, xSize: u32, ySize: u32, frequency: f32, seed: u32) void {
-        FastNoiseC.fnGenUniformGrid2D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), xSize, ySize, frequency, @bitCast(seed), &.{ 0, 0 });
+        FastNoiseC.fnGenUniformGrid2D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(xSize), @bitCast(ySize), frequency, @bitCast(seed), &.{ 0, 0 });
     }
 
     pub fn genUniformGrid3D(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, zStart: i32, xSize: u32, ySize: u32, zSize: u32, frequency: f32, seed: u32) void {
-        FastNoiseC.fnGenUniformGrid3D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), xSize, ySize, zSize, frequency, @bitCast(seed), &.{ 0, 0 });
+        FastNoiseC.fnGenUniformGrid3D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), @bitCast(xSize), @bitCast(ySize), @bitCast(zSize), frequency, @bitCast(seed), &.{ 0, 0 });
     }
 
     pub fn genUniformGrid4D(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, zStart: i32, wStart: i32, xSize: u32, ySize: u32, zSize: u32, wSize: u32, frequency: f32, seed: u32) void {
-        FastNoiseC.fnGenUniformGrid4D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), @bitCast(wStart), xSize, ySize, zSize, wSize, frequency, @bitCast(seed), &.{ 0, 0 });
+        FastNoiseC.fnGenUniformGrid4D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), @bitCast(wStart), @bitCast(xSize), @bitCast(ySize), @bitCast(zSize), @bitCast(wSize), frequency, @bitCast(seed), &.{ 0, 0 });
     }
 
     pub fn genUniformGrid2DOuputMinMax(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, xSize: u32, ySize: u32, frequency: f32, seed: u32, outputMinMax: [2]f32) void {
-        FastNoiseC.fnGenUniformGrid2D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), xSize, ySize, frequency, @bitCast(seed), outputMinMax);
+        FastNoiseC.fnGenUniformGrid2D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(xSize), @bitCast(ySize), frequency, @bitCast(seed), outputMinMax);
     }
 
     pub fn genUniformGrid3DOuputMinMax(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, zStart: i32, xSize: u32, ySize: u32, zSize: u32, frequency: f32, seed: u32, outputMinMax: [2]f32) void {
-        FastNoiseC.fnGenUniformGrid3D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), xSize, ySize, zSize, frequency, @bitCast(seed), outputMinMax);
+        FastNoiseC.fnGenUniformGrid3D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), @bitCast(xSize), @bitCast(ySize), @bitCast(zSize), frequency, @bitCast(seed), outputMinMax);
     }
 
     pub fn genUniformGrid4DOuputMinMax(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, zStart: i32, wStart: i32, xSize: u32, ySize: u32, zSize: u32, wSize: u32, frequency: f32, seed: u32, outputMinMax: [2]f32) void {
-        FastNoiseC.fnGenUniformGrid4D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), @bitCast(wStart), xSize, ySize, zSize, wSize, frequency, @bitCast(seed), outputMinMax);
+        FastNoiseC.fnGenUniformGrid4D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), @bitCast(wStart), @bitCast(xSize), @bitCast(ySize), @bitCast(zSize), @bitCast(wSize), frequency, @bitCast(seed), outputMinMax);
     }
 
     pub fn genPositionArray2D(self: *const SmartNode, target: []f32, xPositions: []f32, yPositions: []f32, xOffset: f32, yOffset: f32, seed: u32) void {
