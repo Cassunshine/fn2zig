@@ -36,6 +36,10 @@
     // Once all dependencies are fetched, `zig build` no longer requires
     // internet connectivity.
     .dependencies = .{
+        .FastNoise2 = .{
+            .url = "git+https://github.com/Auburn/FastNoise2.git#9b75083b87d5e391d43dc0c721d8a9fa51db735a",
+            .hash = "N-V-__8AAMB_CQCtNyUFqWuoTk2_iwYT_pMpOF5UNz4s2Cfm",
+        },
         // See `zig fetch --save <url>` for a command-line interface for adding dependencies.
         //.example = .{
         //    // When updating this field to a new URL, be sure to delete the corresponding

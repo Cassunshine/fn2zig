@@ -13,12 +13,14 @@ pub fn build(b: *std.Build) void {
         },
     );
 
+    const fastNoise2Src = b.dependency("FastNoise2", .{});
+
     lib_mod.link_libc = true;
     lib_mod.link_libcpp = true;
-    lib_mod.addIncludePath(b.path("libs/FastNoise2/include"));
+    lib_mod.addIncludePath(fastNoise2Src.path("include"));
 
     lib_mod.addCSourceFiles(.{
-        .root = b.path("libs/FastNoise2/src"),
+        .root = fastNoise2Src.path("src"),
         .files = &.{
             "FastNoise/FastNoise_C.cpp",
             "FastNoise/Metadata.cpp",
@@ -37,14 +39,14 @@ pub fn build(b: *std.Build) void {
 
     // Add SIMD files
 
-    lib_mod.addCSourceFile(.{ .file = b.path("libs/FastNoise2/src/FastSIMD/FastSIMD_Level_Scalar.cpp"), .flags = &.{"-msse"}, .language = .cpp });
-    lib_mod.addCSourceFile(.{ .file = b.path("libs/FastNoise2/src/FastSIMD/FastSIMD_Level_SSE2.cpp"), .flags = &.{"-msse2"}, .language = .cpp });
-    lib_mod.addCSourceFile(.{ .file = b.path("libs/FastNoise2/src/FastSIMD/FastSIMD_Level_SSE3.cpp"), .flags = &.{"-msse3"}, .language = .cpp });
-    lib_mod.addCSourceFile(.{ .file = b.path("libs/FastNoise2/src/FastSIMD/FastSIMD_Level_SSSE3.cpp"), .flags = &.{"-mssse3"}, .language = .cpp });
-    lib_mod.addCSourceFile(.{ .file = b.path("libs/FastNoise2/src/FastSIMD/FastSIMD_Level_SSE41.cpp"), .flags = &.{"-msse4.1"}, .language = .cpp });
-    lib_mod.addCSourceFile(.{ .file = b.path("libs/FastNoise2/src/FastSIMD/FastSIMD_Level_SSE42.cpp"), .flags = &.{"-msse4.2"}, .language = .cpp });
-    lib_mod.addCSourceFile(.{ .file = b.path("libs/FastNoise2/src/FastSIMD/FastSIMD_Level_AVX2.cpp"), .flags = &.{ "-mavx2", "-mfma" }, .language = .cpp });
-    lib_mod.addCSourceFile(.{ .file = b.path("libs/FastNoise2/src/FastSIMD/FastSIMD_Level_AVX512.cpp"), .flags = &.{ "-mavx512f", "-mavx512dq", "-mfma" }, .language = .cpp });
+    lib_mod.addCSourceFile(.{ .file = fastNoise2Src.path("src/FastSIMD/FastSIMD_Level_Scalar.cpp"), .flags = &.{"-msse"}, .language = .cpp });
+    lib_mod.addCSourceFile(.{ .file = fastNoise2Src.path("src/FastSIMD/FastSIMD_Level_SSE2.cpp"), .flags = &.{"-msse2"}, .language = .cpp });
+    lib_mod.addCSourceFile(.{ .file = fastNoise2Src.path("src/FastSIMD/FastSIMD_Level_SSE3.cpp"), .flags = &.{"-msse3"}, .language = .cpp });
+    lib_mod.addCSourceFile(.{ .file = fastNoise2Src.path("src/FastSIMD/FastSIMD_Level_SSSE3.cpp"), .flags = &.{"-mssse3"}, .language = .cpp });
+    lib_mod.addCSourceFile(.{ .file = fastNoise2Src.path("src/FastSIMD/FastSIMD_Level_SSE41.cpp"), .flags = &.{"-msse4.1"}, .language = .cpp });
+    lib_mod.addCSourceFile(.{ .file = fastNoise2Src.path("src/FastSIMD/FastSIMD_Level_SSE42.cpp"), .flags = &.{"-msse4.2"}, .language = .cpp });
+    lib_mod.addCSourceFile(.{ .file = fastNoise2Src.path("src/FastSIMD/FastSIMD_Level_AVX2.cpp"), .flags = &.{ "-mavx2", "-mfma" }, .language = .cpp });
+    lib_mod.addCSourceFile(.{ .file = fastNoise2Src.path("src/FastSIMD/FastSIMD_Level_AVX512.cpp"), .flags = &.{ "-mavx512f", "-mavx512dq", "-mfma" }, .language = .cpp });
 
     const lib = b.addLibrary(.{
         .linkage = .static,
