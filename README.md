@@ -1,5 +1,5 @@
 # fn2zig
-FastNoise2 binding/wrapper for Zig.
+[FastNoise2](https://github.com/Auburn/FastNoise2) binding/wrapper for Zig.
 
 Made in a day or two, super incomplete, but slightly ziggified.
 
