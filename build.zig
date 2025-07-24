@@ -2,14 +2,14 @@ const std = @import("std");
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
-    //const optimize = b.standardOptimizeOption(.{});
+    const optimize = b.standardOptimizeOption(.{});
 
     const lib_mod = b.addModule(
         "fn2zig",
         .{
             .root_source_file = b.path("src/fn2zig.zig"),
             .target = target,
-            .optimize = .ReleaseFast,
+            .optimize = optimize,
         },
     );
 
@@ -32,7 +32,7 @@ pub fn build(b: *std.Build) void {
             "-DFASTNOISE_C_IMPLEMENTATION",
             "-DFASTNOISE_C_EXPORTS",
             "-ffast-math",
-            "-fno-stack-protector",
+            "-fno-sanitize=undefined",
         },
         .language = .cpp,
     });
