@@ -25,6 +25,10 @@ pub fn fromEncodedTree(encoded: [:0]const u8) !SmartNode {
 pub const SmartNode = struct {
     ptr: *anyopaque,
 
+    pub fn destroy(self: *SmartNode) void {
+        FastNoiseC.fnDeleteNodeRef(self.ptr);
+    }
+
     pub fn genUniformGrid2D(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, xSize: u32, ySize: u32, frequency: f32, seed: u32) void {
         FastNoiseC.fnGenUniformGrid2D(self.ptr, target.ptr, xStart, yStart, xSize, ySize, frequency, @bitCast(seed), &.{ 0, 0 });
     }
