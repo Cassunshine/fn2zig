@@ -79,6 +79,7 @@
         "build.zig",
         "build.zig.zon",
         "src",
+        "libs/FastNoise2",
         // For example...
         //"LICENSE",
         //"README.md",
