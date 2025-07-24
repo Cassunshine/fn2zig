@@ -25,7 +25,7 @@ pub fn fromEncodedTree(encoded: [:0]const u8) !SmartNode {
 pub const SmartNode = struct {
     ptr: *anyopaque,
 
-    pub fn destroy(self: *SmartNode) void {
+    pub fn destroy(self: *const SmartNode) void {
         FastNoiseC.fnDeleteNodeRef(self.ptr);
     }
 
