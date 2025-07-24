@@ -30,51 +30,57 @@ pub const SmartNode = struct {
     }
 
     pub fn genUniformGrid2D(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, xSize: u32, ySize: u32, frequency: f32, seed: u32) void {
-        FastNoiseC.fnGenUniformGrid2D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(xSize), @bitCast(ySize), frequency, @bitCast(seed), &.{ 0, 0 });
+        const minMax = [2]f32{ 0, 0 };
+        self.genUniformGrid2DOuputMinMax(target, xStart, yStart, xSize, ySize, frequency, seed, minMax);
     }
 
     pub fn genUniformGrid3D(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, zStart: i32, xSize: u32, ySize: u32, zSize: u32, frequency: f32, seed: u32) void {
-        FastNoiseC.fnGenUniformGrid3D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), @bitCast(xSize), @bitCast(ySize), @bitCast(zSize), frequency, @bitCast(seed), &.{ 0, 0 });
+        const minMax = [2]f32{ 0, 0 };
+        self.genUniformGrid3DOuputMinMax(target, xStart, yStart, zStart, xSize, ySize, zSize, frequency, seed, minMax);
     }
 
     pub fn genUniformGrid4D(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, zStart: i32, wStart: i32, xSize: u32, ySize: u32, zSize: u32, wSize: u32, frequency: f32, seed: u32) void {
-        FastNoiseC.fnGenUniformGrid4D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), @bitCast(wStart), @bitCast(xSize), @bitCast(ySize), @bitCast(zSize), @bitCast(wSize), frequency, @bitCast(seed), &.{ 0, 0 });
+        const minMax = [2]f32{ 0, 0 };
+        self.genUniformGrid4DOuputMinMax(target, xStart, yStart, zStart, wStart, xSize, ySize, zSize, wSize, frequency, seed, minMax);
     }
 
     pub fn genUniformGrid2DOuputMinMax(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, xSize: u32, ySize: u32, frequency: f32, seed: u32, outputMinMax: [2]f32) void {
-        FastNoiseC.fnGenUniformGrid2D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(xSize), @bitCast(ySize), frequency, @bitCast(seed), outputMinMax);
+        FastNoiseC.fnGenUniformGrid2D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(xSize), @bitCast(ySize), frequency, @bitCast(seed), @ptrCast(@constCast(&outputMinMax)));
     }
 
     pub fn genUniformGrid3DOuputMinMax(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, zStart: i32, xSize: u32, ySize: u32, zSize: u32, frequency: f32, seed: u32, outputMinMax: [2]f32) void {
-        FastNoiseC.fnGenUniformGrid3D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), @bitCast(xSize), @bitCast(ySize), @bitCast(zSize), frequency, @bitCast(seed), outputMinMax);
+        FastNoiseC.fnGenUniformGrid3D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), @bitCast(xSize), @bitCast(ySize), @bitCast(zSize), frequency, @bitCast(seed), @ptrCast(@constCast(&outputMinMax)));
     }
 
     pub fn genUniformGrid4DOuputMinMax(self: *const SmartNode, target: []f32, xStart: i32, yStart: i32, zStart: i32, wStart: i32, xSize: u32, ySize: u32, zSize: u32, wSize: u32, frequency: f32, seed: u32, outputMinMax: [2]f32) void {
-        FastNoiseC.fnGenUniformGrid4D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), @bitCast(wStart), @bitCast(xSize), @bitCast(ySize), @bitCast(zSize), @bitCast(wSize), frequency, @bitCast(seed), outputMinMax);
+        FastNoiseC.fnGenUniformGrid4D(self.ptr, target.ptr, @bitCast(xStart), @bitCast(yStart), @bitCast(zStart), @bitCast(wStart), @bitCast(xSize), @bitCast(ySize), @bitCast(zSize), @bitCast(wSize), frequency, @bitCast(seed), @ptrCast(@constCast(&outputMinMax)));
     }
 
     pub fn genPositionArray2D(self: *const SmartNode, target: []f32, xPositions: []f32, yPositions: []f32, xOffset: f32, yOffset: f32, seed: u32) void {
-        FastNoiseC.fnGenPositionArray2D(self.ptr, target.ptr, xPositions.len, xPositions.ptr, yPositions.ptr, xOffset, yOffset, @bitCast(seed), &.{ 0, 0 });
+        const minMax = [2]f32{ 0, 0 };
+        self.genPositionArray2DOuputMinMax(target, xPositions, yPositions, xOffset, yOffset, seed, minMax);
     }
 
     pub fn genPositionArray3D(self: *const SmartNode, target: []f32, xPositions: []f32, yPositions: []f32, zPositions: []f32, xOffset: f32, yOffset: f32, zOffset: f32, seed: u32) void {
-        FastNoiseC.fnGenPositionArray3D(self.ptr, target.ptr, xPositions.len, xPositions.ptr, yPositions.ptr, zPositions.ptr, xOffset, yOffset, zOffset, @bitCast(seed), &.{ 0, 0 });
+        const minMax = [2]f32{ 0, 0 };
+        self.genPositionArray3DOuputMinMax(target, xPositions, yPositions, zPositions, xOffset, yOffset, zOffset, seed, minMax);
     }
 
     pub fn genPositionArray4D(self: *const SmartNode, target: []f32, xPositions: []f32, yPositions: []f32, zPositions: []f32, wPositions: []f32, xOffset: f32, yOffset: f32, zOffset: f32, wOffset: f32, seed: u32) void {
-        FastNoiseC.fnGenPositionArray4D(self.ptr, target.ptr, xPositions.len, xPositions.ptr, yPositions.ptr, zPositions.ptr, wPositions.ptr, xOffset, yOffset, zOffset, wOffset, @bitCast(seed), &.{ 0, 0 });
+        const minMax = [2]f32{ 0, 0 };
+        self.genPositionArray4DOuputMinMax(target, xPositions, yPositions, zPositions, wPositions, xOffset, yOffset, zOffset, wOffset, seed, minMax);
     }
 
     pub fn genPositionArray2DOuputMinMax(self: *const SmartNode, target: []f32, xPositions: []f32, yPositions: []f32, xOffset: f32, yOffset: f32, seed: u32, outputMinMax: [2]f32) void {
-        FastNoiseC.fnGenPositionArray2D(self.ptr, target.ptr, xPositions.len, xPositions.ptr, yPositions.ptr, xOffset, yOffset, @bitCast(seed), outputMinMax);
+        FastNoiseC.fnGenPositionArray2D(self.ptr, target.ptr, xPositions.len, xPositions.ptr, yPositions.ptr, xOffset, yOffset, @bitCast(seed), @ptrCast(@constCast(&outputMinMax)));
     }
 
     pub fn genPositionArray3DOuputMinMax(self: *const SmartNode, target: []f32, xPositions: []f32, yPositions: []f32, zPositions: []f32, xOffset: f32, yOffset: f32, zOffset: f32, seed: u32, outputMinMax: [2]f32) void {
-        FastNoiseC.fnGenPositionArray3D(self.ptr, target.ptr, xPositions.len, xPositions.ptr, yPositions.ptr, zPositions.ptr, xOffset, yOffset, zOffset, @bitCast(seed), outputMinMax);
+        FastNoiseC.fnGenPositionArray3D(self.ptr, target.ptr, xPositions.len, xPositions.ptr, yPositions.ptr, zPositions.ptr, xOffset, yOffset, zOffset, @bitCast(seed), @ptrCast(@constCast(&outputMinMax)));
     }
 
     pub fn genPositionArray4DOuputMinMax(self: *const SmartNode, target: []f32, xPositions: []f32, yPositions: []f32, zPositions: []f32, wPositions: []f32, xOffset: f32, yOffset: f32, zOffset: f32, wOffset: f32, seed: u32, outputMinMax: [2]f32) void {
-        FastNoiseC.fnGenPositionArray4D(self.ptr, target.ptr, xPositions.len, xPositions.ptr, yPositions.ptr, zPositions.ptr, wPositions.ptr, xOffset, yOffset, zOffset, wOffset, @bitCast(seed), outputMinMax);
+        FastNoiseC.fnGenPositionArray4D(self.ptr, target.ptr, xPositions.len, xPositions.ptr, yPositions.ptr, zPositions.ptr, wPositions.ptr, xOffset, yOffset, zOffset, wOffset, @bitCast(seed), @ptrCast(@constCast(&outputMinMax)));
     }
 
     pub fn genSingle2D(self: *const SmartNode, x: f32, y: f32, seed: u32) f32 {
